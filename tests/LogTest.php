@@ -18,8 +18,21 @@ class LogTest extends TestCase
 
     public function test_it_should_log_info(): void
     {
-        $output = $this->log->info('Dit is een test');
+        ob_start();
+        $this->log->info('Dit is een test');
+
+        $output = ob_get_clean();
 
         $this->assertEquals('INFO: Dit is een test', $output);
+    }
+
+    public function test_it_should_log_error(): void
+    {
+        ob_start();
+        $this->log->error('Dit is een test');
+
+        $output = ob_get_clean();
+
+        $this->assertEquals('ERROR: Dit is een test', $output);
     }
 }
